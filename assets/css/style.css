@@ -34,6 +34,7 @@ textarea {
     white-space: pre-wrap;
     height: 80px;
     border-top: 1px solid white;
+    ;
 }
 
 .hour {
@@ -72,14 +73,4 @@ textarea {
 
 .form-control {
     margin: 0 1px 0 0;
-}
-
-.rows {
-    height: 75px;
-    margin-bottom: 5px;
-    text-align: center;
-}
-
-.input-field {
-    height: 75px;
 }
