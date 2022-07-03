@@ -9,28 +9,20 @@ var timeBlocks = [
     { hour: "2PM", time: 14 },
     { hour: "3PM", time: 15 },
     { hour: "4PM", time: 16 },
-    { hour: "5PM", time: 17 },
+    { hour: "5PM", time: 17 }
 ];
 
 var tasks = ["", "", "", "", "", "", "", "", ""];
 
-$(document).ready(function () {
-    start();
-    
-    $("#currentDay").append(currentDay);
+function start() {
+    var storedTasks = JSON.parse(localStorage.getItem("tasks"));
 
-    $(".saveBtn").click(function (event) {
-        event.preventDefault();
-        console.log("Clicked save button");
+    if (storedTasks !== null) {
+        tasks = storedTasks;
+    }
 
-        var dataIndex = $(this).attr("data-index");
-        var textInput = $("#input${dataIndex}").val();
-
-        tasks.splice(dataIndex, 1, textInput);
-
-        storeTasks();
-    })
-})
+    generateTimeBlocks();
+}
 
 function generateTimeBlocks() {
     $(".container").empty();
@@ -54,8 +46,8 @@ function generateTimeBlocks() {
 
         var timeBlockEl = $("<form>").attr("class", "input-group row");
         var hourDivEl = $("<div>").attr("class", "col-1");
-        var hourEl = $("<div>").attr("class", "hour text-right");
-        var inputEl = $("<textarea>").attr("class", "form-control textarea ${inputElStyle}").attr("type", "text").attr("id", "input" + i).val(taskText);
+        var hourEl = $("<div>").attr("class", "hour text-right").text(hourName);
+        var inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").attr("id", "input" + i).val(taskText);
         var buttonEl = $("<div>").attr("class", "input-group-append");
         var button = $("<button>").attr("class", "saveBtn").attr("data-index", i);
         var saveIconEl = $("<span>").attr("class", "oi oi-hard-drive");
@@ -69,10 +61,29 @@ function generateTimeBlocks() {
     }
 }
 
-function start() {
-   
-}
+$(document).ready(function () {
+    start();
+    
+    $("#currentDay").append(currentDay);
 
-setInterval(function () {
+    $(".saveBtn").click(function (event) {
+        event.preventDefault();
+        console.log("Clicked save button");
 
+        var dataIndex = $(this).attr("data-index");
+        var textInput = $(`#input${dataIndex}`).val();
+
+        tasks.splice(dataIndex, 1, textInput);
+
+        storeTasks();
+    });
+
+    setInterval(function () {
+        currentHour = parseInt(moment().format("HH"));
+        generateTimeBlocks();
+    }, (1000 * 60) * 5);
 })
+
+function storeTasks() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
