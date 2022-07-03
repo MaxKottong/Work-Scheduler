@@ -15,12 +15,21 @@ var timeBlocks = [
 var tasks = ["", "", "", "", "", "", "", "", ""];
 
 $(document).ready(function () {
+    start();
+    
     $("#currentDay").append(currentDay);
-})
 
-$(".saveBtn").click(function (event) {
-    event.preventDefault();
-    console.log("Clicked");
+    $(".saveBtn").click(function (event) {
+        event.preventDefault();
+        console.log("Clicked save button");
+
+        var dataIndex = $(this).attr("data-index");
+        var textInput = $("#input${dataIndex}").val();
+
+        tasks.splice(dataIndex, 1, textInput);
+
+        storeTasks();
+    })
 })
 
 function generateTimeBlocks() {
@@ -52,7 +61,16 @@ function generateTimeBlocks() {
         var saveIconEl = $("<span>").attr("class", "oi oi-hard-drive");
 
         $(".container").append(timeBlockEl);
+
+        button.append(saveIconEl);
+        buttonEl.append(button);
+        hourDivEl.append(hourEl);
+        timeBlockEl.append(hourDivEl).append(inputEl).append(buttonEl);
     }
+}
+
+function start() {
+   
 }
 
 setInterval(function () {
