@@ -64,6 +64,7 @@ textarea {
     border-bottom-right-radius: 15px;
     background-color: #06AED5;
     color: white;
+    width: 100%;
 }
 
 .saveBtn i:hover {
@@ -73,6 +74,10 @@ textarea {
 
 .form-control {
     margin: 0 1px 0 0;
+}
+
+.input-group-append {
+    padding-left: 0;
 }
 
 .col-1 {

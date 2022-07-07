@@ -48,7 +48,7 @@ function generateTimeBlocks() {
         var hourDivEl = $("<div>").attr("class", "col-1");
         var hourEl = $("<div>").attr("class", "hour text-right").text(hourName);
         var inputEl = $("<textarea>").attr("class", `form-control textarea ${inputElStyle}`).attr("type", "text").attr("id", "input" + i).val(taskText);
-        var buttonEl = $("<div>").attr("class", "input-group-append");
+        var buttonEl = $("<div>").attr("class", "input-group-append col-1");
         var button = $("<button>").attr("class", "saveBtn").attr("data-index", i);
         var saveIconEl = $("<span>").attr("class", "oi oi-hard-drive");
 
